@@ -1,7 +1,10 @@
+using Api.Configurations;
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,9 +29,11 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-
+            //we have to make a reference between context and the sql server
+            services.AddDbContext<WmContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
+           
             //change policy later if needed
             services.AddCors(o => {
                 o.AddPolicy("AllowAll", builder =>
@@ -37,11 +42,17 @@ namespace Api
                     .AllowAnyHeader());
             });
 
+            //auto mapper services settup
+            //maybe change later to have individual profiles 
+            services.AddAutoMapper(typeof(MapperInitializer));
+
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

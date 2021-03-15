@@ -1,3 +1,4 @@
+using Api.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,16 +14,23 @@ namespace Api
 {
     public class Program
     {
+        public const string ApplicationName = "wm";
+
         public static void Main(string[] args)
         {
+            /*
             Log.Logger = new LoggerConfiguration()
                .WriteTo.File(
                    path: "C:\\Users\\Korisnik\\Desktop\\waterm\\log\\log-.txt",
                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
                    rollingInterval: RollingInterval.Day,
                    restrictedToMinimumLevel: LogEventLevel.Information
-               ).CreateLogger();
+               ).CreateLogger();*/
+
+            //logging
+            LogCore.Configure(ApplicationName);
             
+
             //test
             try
             {
