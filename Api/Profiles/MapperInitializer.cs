@@ -2,6 +2,7 @@
 using Api.Models.Create;
 using AutoMapper;
 using Domain;
+using Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,10 @@ namespace Api.Configurations
             //WaterMeter Profile
             CreateMap<WaterMeter, WaterMeterDTO>().ReverseMap();
             CreateMap<WaterMeter, CreateWaterMeterDTO>().ReverseMap();
+
+            //User Profile
+            CreateMap<ApiUser, UserDTO>().ReverseMap();
+            //no need to create a LoginUserDTO map because
 
 
         }

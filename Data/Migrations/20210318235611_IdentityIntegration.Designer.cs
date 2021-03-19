@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(WmContext))]
-    partial class WmContextModelSnapshot : ModelSnapshot
+    [Migration("20210318235611_IdentityIntegration")]
+    partial class IdentityIntegration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,29 +294,6 @@ namespace Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "e9d6f1d7-17af-4458-861a-2cf181a98de2",
-                            ConcurrencyStamp = "616a1551-9102-496e-a585-fee242fee4cc",
-                            Name = "AndroidUser",
-                            NormalizedName = "ANDROIDUSER"
-                        },
-                        new
-                        {
-                            Id = "2429376e-7cf0-4074-b9fa-21ff74528567",
-                            ConcurrencyStamp = "815cb514-6efa-43d5-a30e-3da75e76092d",
-                            Name = "WebUser",
-                            NormalizedName = "WEBUSER"
-                        },
-                        new
-                        {
-                            Id = "31afc134-d34d-4c91-b54a-c846ccbbb2cc",
-                            ConcurrencyStamp = "6dca3599-5e0c-4bbb-afb4-d617fcdfabfc",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
