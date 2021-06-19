@@ -12,6 +12,9 @@ namespace Api.Configurations
 {
     public class MapperInitializer : Profile
     {
+        //research more when to use reversemap
+        //when to only use 1 direction
+
         public MapperInitializer()
         {
             //Measurement Profile
@@ -26,17 +29,13 @@ namespace Api.Configurations
             CreateMap<ReadingStatus, ReadingStatusDTO>().ReverseMap();
             CreateMap<ReadingStatus, CreateReadingStatusDTO>().ReverseMap();
 
-            //Route Profile
-            CreateMap<Route, RouteDTO>().ReverseMap();
-            CreateMap<Route, RouteDTO>().ReverseMap();
-
             //WaterMeter Profile
             CreateMap<WaterMeter, WaterMeterDTO>().ReverseMap();
             CreateMap<WaterMeter, CreateWaterMeterDTO>().ReverseMap();
 
             //User Profile
-            CreateMap<ApiUser, UserDTO>().ReverseMap();
-            //no need to create a LoginUserDTO map because
+            CreateMap<User, UserDTO>().ReverseMap();
+            //no need to create a LoginUserDTO map because ...?
 
 
         }

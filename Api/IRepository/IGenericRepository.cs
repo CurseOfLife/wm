@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Api.IRepository
 {
@@ -19,6 +21,15 @@ namespace Api.IRepository
         void Update(T entity);
         Task Delete(int id);
         void DeleteRange(IEnumerable<T> entities);
-        
+
+        //call for when we want to allow the client to use query params.. like pagesize pagenumber
+        Task<IPagedList<T>> GetAllPagedList(
+          RequestParams requestParams = null,
+          List<string> includes = null       
+      );
+
+
+        bool Exists(string username);
+        bool Exists(int key);
     }
 }

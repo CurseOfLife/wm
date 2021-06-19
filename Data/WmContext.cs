@@ -13,21 +13,24 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class WmContext : IdentityDbContext<ApiUser>
-    {
-        public DbSet<Measurement> Measurements { get; set; }
-        public DbSet<WaterMeter> WaterMeters { get; set; }
-        public DbSet<MeasuringPoint> MeasuringPoints { get; set; }
-        public DbSet<Route> Routes { get; set; }
-        public DbSet<ReadingStatus> ReadingStatuses { get; set; }
+    //TODO
+    //cascade or restricted check later and change then migrate
 
+    public class WmContext : IdentityDbContext<User>
+    {
+       
+        public DbSet<Measurement> Measurements { get; set; } //Measurements table 
+        public DbSet<WaterMeter> WaterMeters { get; set; } //WaterMeters table 
+        public DbSet<MeasuringPoint> MeasuringPoints { get; set; } //MeasuringPoints table 
+        public DbSet<ReadingStatus> ReadingStatuses { get; set; } //ReadingStatuses table 
+
+        //passing configurations to the IdentityDBContext constructor
         public WmContext(DbContextOptions opt) : base(opt)
         {
 
         }
 
-        // Update-database -TargetMigration:0
-
+       //preconfiguring database
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -38,7 +41,8 @@ namespace Data
             builder.ApplyConfiguration(new RoleConfig());
             builder.ApplyConfiguration(new MeasuringPointConfig());
             builder.ApplyConfiguration(new WaterMeterConfig());
-           
+            builder.ApplyConfiguration(new UserConfig());
+            builder.ApplyConfiguration(new ReadingStatusesConfig());
         }
     }
 }

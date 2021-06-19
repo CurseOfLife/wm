@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(WmContext))]
-    partial class WmContextModelSnapshot : ModelSnapshot
+    [Migration("20210509181141_RouteRemoved")]
+    partial class RouteRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +163,7 @@ namespace Data.Migrations
                             Number = "1",
                             Place = "Test Place Name One",
                             Street = "Test Street Name One",
-                            UserId = "f94d651e-3e4a-429d-b987-fa0b9f7be9ea"
+                            UserId = "f3777d4d-0840-4b53-b603-6695d1cc13b0"
                         },
                         new
                         {
@@ -170,7 +172,7 @@ namespace Data.Migrations
                             Number = "2",
                             Place = "Test Place Name Two",
                             Street = "Test Street Name Two",
-                            UserId = "f94d651e-3e4a-429d-b987-fa0b9f7be9ea"
+                            UserId = "f3777d4d-0840-4b53-b603-6695d1cc13b0"
                         },
                         new
                         {
@@ -179,7 +181,7 @@ namespace Data.Migrations
                             Number = "3",
                             Place = "Test Place Name Three",
                             Street = "Test Street Name Three",
-                            UserId = "f94d651e-3e4a-429d-b987-fa0b9f7be9ea"
+                            UserId = "f3777d4d-0840-4b53-b603-6695d1cc13b0"
                         });
                 });
 
@@ -190,35 +192,13 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Value")
+                    b.Property<string>("Name")
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ReadingStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Value = "Uspesno"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Value = "Zakljucana santa"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Value = "Prljavo brojilo"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Value = "Auto na santu"
-                        });
                 });
 
             modelBuilder.Entity("Domain.WaterMeter", b =>
@@ -309,22 +289,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "85a27a2f-7c11-4379-b4c0-46d565c8d8bb",
-                            ConcurrencyStamp = "8fcde353-7b8f-43bb-9f7e-a67082275e20",
+                            Id = "12ca4892-16e7-4080-9930-72ed44dc10ec",
+                            ConcurrencyStamp = "6840ed40-c77a-4d52-bf9f-ba29ee28a029",
                             Name = "AndroidUser",
                             NormalizedName = "ANDROIDUSER"
                         },
                         new
                         {
-                            Id = "601e7032-7897-47e3-acb1-17ba2310d5a8",
-                            ConcurrencyStamp = "dd4afa86-74fd-4889-b385-79c571cf73e5",
+                            Id = "507a051c-b7fe-4d19-9499-31863c348231",
+                            ConcurrencyStamp = "c3c8bc45-f9d9-4797-9a09-0b0b88b010a8",
                             Name = "WebUser",
                             NormalizedName = "WEBUSER"
                         },
                         new
                         {
-                            Id = "a7345247-a41e-4947-80a6-26378ca50e25",
-                            ConcurrencyStamp = "8ebfb832-2fe2-4dd0-9dd7-4477b68de4a1",
+                            Id = "6ae61c0a-29d2-4b3e-ac97-9c25457ea299",
+                            ConcurrencyStamp = "254e45bb-14e2-40cf-b4ce-0f5df8c7ca1c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

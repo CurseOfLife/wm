@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(WmContext))]
-    partial class WmContextModelSnapshot : ModelSnapshot
+    [Migration("20210508201313_RouteUserRelationshipAdded")]
+    partial class RouteUserRelationshipAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,16 +142,16 @@ namespace Data.Migrations
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)");
 
+                    b.Property<int?>("RouteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Street")
                         .HasMaxLength(95)
                         .HasColumnType("nvarchar(95)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RouteId");
 
                     b.ToTable("MeasuringPoints");
 
@@ -160,8 +162,7 @@ namespace Data.Migrations
                             Description = "Name Surname One",
                             Number = "1",
                             Place = "Test Place Name One",
-                            Street = "Test Street Name One",
-                            UserId = "f94d651e-3e4a-429d-b987-fa0b9f7be9ea"
+                            Street = "Test Street Name One"
                         },
                         new
                         {
@@ -169,8 +170,7 @@ namespace Data.Migrations
                             Description = "Name Surname Two",
                             Number = "2",
                             Place = "Test Place Name Two",
-                            Street = "Test Street Name Two",
-                            UserId = "f94d651e-3e4a-429d-b987-fa0b9f7be9ea"
+                            Street = "Test Street Name Two"
                         },
                         new
                         {
@@ -178,8 +178,7 @@ namespace Data.Migrations
                             Description = "Name Surname Three",
                             Number = "3",
                             Place = "Test Place Name Three",
-                            Street = "Test Street Name Three",
-                            UserId = "f94d651e-3e4a-429d-b987-fa0b9f7be9ea"
+                            Street = "Test Street Name Three"
                         });
                 });
 
@@ -190,35 +189,32 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Value")
+                    b.Property<string>("Name")
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ReadingStatuses");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Value = "Uspesno"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Value = "Zakljucana santa"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Value = "Prljavo brojilo"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Value = "Auto na santu"
-                        });
+            modelBuilder.Entity("Domain.Route", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Routes");
                 });
 
             modelBuilder.Entity("Domain.WaterMeter", b =>
@@ -309,22 +305,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "85a27a2f-7c11-4379-b4c0-46d565c8d8bb",
-                            ConcurrencyStamp = "8fcde353-7b8f-43bb-9f7e-a67082275e20",
+                            Id = "ac955987-5f73-4dcc-9c0a-19d0c9a8833d",
+                            ConcurrencyStamp = "9efca380-e591-493b-bd3f-645bf7a625e4",
                             Name = "AndroidUser",
                             NormalizedName = "ANDROIDUSER"
                         },
                         new
                         {
-                            Id = "601e7032-7897-47e3-acb1-17ba2310d5a8",
-                            ConcurrencyStamp = "dd4afa86-74fd-4889-b385-79c571cf73e5",
+                            Id = "07d891da-ae08-454d-8d34-4a443e076e8e",
+                            ConcurrencyStamp = "d1dd8db3-4da4-4450-9977-ee77f5bca886",
                             Name = "WebUser",
                             NormalizedName = "WEBUSER"
                         },
                         new
                         {
-                            Id = "a7345247-a41e-4947-80a6-26378ca50e25",
-                            ConcurrencyStamp = "8ebfb832-2fe2-4dd0-9dd7-4477b68de4a1",
+                            Id = "e53cf919-0297-4865-9e1c-1fd4647d8c66",
+                            ConcurrencyStamp = "895d5d15-8b9c-4266-b4f9-ea76601baa46",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -455,9 +451,18 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.MeasuringPoint", b =>
                 {
-                    b.HasOne("Domain.Identity.User", "User")
+                    b.HasOne("Domain.Route", "Route")
                         .WithMany("MeasuringPoints")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("RouteId");
+
+                    b.Navigation("Route");
+                });
+
+            modelBuilder.Entity("Domain.Route", b =>
+                {
+                    b.HasOne("Domain.Identity.User", "User")
+                        .WithOne("Route")
+                        .HasForeignKey("Domain.Route", "UserId");
 
                     b.Navigation("User");
                 });
@@ -526,7 +531,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Identity.User", b =>
                 {
-                    b.Navigation("MeasuringPoints");
+                    b.Navigation("Route");
                 });
 
             modelBuilder.Entity("Domain.MeasuringPoint", b =>
@@ -537,6 +542,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Domain.ReadingStatus", b =>
                 {
                     b.Navigation("Measurements");
+                });
+
+            modelBuilder.Entity("Domain.Route", b =>
+                {
+                    b.Navigation("MeasuringPoints");
                 });
 
             modelBuilder.Entity("Domain.WaterMeter", b =>

@@ -1,4 +1,6 @@
-﻿using Domain;
+﻿using Api.Repository;
+using Domain;
+using Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,11 @@ namespace Api.IRepository
         IGenericRepository<Measurement> Measurements { get; }
         IGenericRepository<MeasuringPoint> MeasuringPoints { get; }
         IGenericRepository<ReadingStatus> ReadingStatuses { get; }
-        IGenericRepository<Route> Routes { get; }
         IGenericRepository<WaterMeter> WaterMeters { get; }
 
+        IGenericRepository<User> User { get; }
+
+       
         Task Save();
     }
 }

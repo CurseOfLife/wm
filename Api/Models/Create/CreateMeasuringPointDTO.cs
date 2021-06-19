@@ -10,6 +10,7 @@ namespace Api.Models.Create
     public class CreateMeasuringPointDTO
     {
 
+        //add required where needed
         [MaxLength(95)]
         public string Street { get; set; }
 
@@ -20,7 +21,7 @@ namespace Api.Models.Create
         public string Place { get; set; } //city, village
         public string Description { get; set; } //should be owner 
      
-        public int? RouteId { get; set; }
+ 
        
     }
 }

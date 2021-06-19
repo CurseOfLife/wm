@@ -27,11 +27,14 @@ namespace Api
                    restrictedToMinimumLevel: LogEventLevel.Information
                ).CreateLogger();*/
 
-            //logging
+           
+            
+            //configuring logging
             LogCore.Configure(ApplicationName);
             
 
-            //test
+            //testing logging 
+            //when ever the api starts
             try
             {
                 Log.Information("Application Is Starting");
@@ -50,6 +53,7 @@ namespace Api
             CreateHostBuilder(args).Build().Run();
         }
 
+        //using serilog as the default logger configuration
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()

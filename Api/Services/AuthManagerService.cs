@@ -15,25 +15,25 @@ namespace Api.Services
 {
     public class AuthManagerService : IAuthManagerService
     {
-        private readonly UserManager<ApiUser> _usermanager;
+        private readonly UserManager<User> _usermanager;
         private readonly IConfiguration _configuration;
 
 
-        private ApiUser _user;
+        private User _user;
 
-        public AuthManagerService(UserManager<ApiUser> usermanager,
+        public AuthManagerService(UserManager<User> usermanager,
             IConfiguration configuration)
         {
             _usermanager = usermanager;
             _configuration = configuration;
         }
 
+        //creating token
         public async Task<string> CreateToken()
         {
             var signingCredentials = GetSigninCredentials();
             var claims = await GetClaims();
             var token = GenerateTokenOptions(signingCredentials, claims);
-
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
@@ -55,6 +55,7 @@ namespace Api.Services
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
+
         private async Task<List<Claim>> GetClaims()
         {
             var claims = new List<Claim>
@@ -71,18 +72,22 @@ namespace Api.Services
 
             return claims;
         }
+
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var jwtSettings = _configuration.GetSection("Jwt");
 
 
             //how long the token lasts before its not valid 
-            var expirationDate = DateTime.Now.AddHours(Convert.ToDouble(
+            var expirationDate = DateTime.Now.AddHours(Convert.ToInt16(
                 jwtSettings.GetSection("Lifetime").Value
                 ));
 
+         
+
             var token = new JwtSecurityToken(
-                issuer: jwtSettings.GetSection("validIssuer").Value,
+                issuer: jwtSettings.GetSection("Issuer").Value,
+                audience: jwtSettings.GetSection("Audience").Value,
                 claims: claims,
                 expires: expirationDate,
                 signingCredentials: signingCredentials

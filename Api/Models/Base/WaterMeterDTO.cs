@@ -12,6 +12,6 @@ namespace Api.Models
         public int Id { get; set; }  
         public MeasuringPointDTO MeasuringPoint { get; set; }
 
-        public IList<MeasurementDTO> Measurements { get; set; }
+      //  public IList<MeasurementDTO> Measurements { get; set; }
     }
 }

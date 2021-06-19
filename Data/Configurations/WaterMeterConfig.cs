@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Configurations
 {
+    //preconfiguring water meter table 
     public class WaterMeterConfig : IEntityTypeConfiguration<WaterMeter>
     {
         public void Configure(EntityTypeBuilder<WaterMeter> builder)

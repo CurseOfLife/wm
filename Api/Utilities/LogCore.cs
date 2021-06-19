@@ -23,6 +23,7 @@ namespace Api.Helpers
             Log.Logger = logConfig.CreateLogger();
         }
 
+        //getting environemnt variable for token
         private static string GetEnvironment()
         {
             // The environment variable is needed for some logging configuration.

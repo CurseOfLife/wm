@@ -9,6 +9,6 @@ namespace Api.Models
     public class ReadingStatusDTO : CreateReadingStatusDTO
     {  
         public int Id { get; set; }
-        public IList<MeasurementDTO> Measurements { get; set; }
+       // public IList<MeasurementDTO> Measurements { get; set; }
     }
 }

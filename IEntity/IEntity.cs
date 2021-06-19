@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Api.Models.Create
+
+namespace IEntities
 {
-    public class CreateRouteDTO
+    public interface IEntity
     {
-        //other route specific params
-        // userID
     }
 }

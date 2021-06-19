@@ -9,7 +9,6 @@ namespace Api.Models.Create
     public class CreateReadingStatusDTO
     {
         [MaxLength(64)]
-        public string Name { get; set; }
-      
+        public string Value { get; set; }      
     }
 }

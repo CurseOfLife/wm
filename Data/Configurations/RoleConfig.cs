@@ -10,6 +10,7 @@ namespace Api.Configurations.Entities
 {
     public class RoleConfig : IEntityTypeConfiguration<IdentityRole>
     {
+        //preconfiguring roles table 
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {
             builder.HasData(
